@@ -27,6 +27,19 @@ spring:
           uri: lb://USERS-SERVICE
           predicates:
             - Path=/api/v1/users/**
+
+        - id: aadhar-service
+          uri: lb://AADHAR-SERVICE
+          predicates: [ "Path=/api/v1/verify/**,/api/v1/valid-numbers/**" ]
+
+        - id: company-service
+          uri: lb://COMPANY-CRV-SERVICE      
+          predicates: [ "Path=/api/v1/company/**" ]
+
+        - id: payment-gateway-service
+          uri: lb://PAYMENT-GATEWAY-SERVICE
+          predicates: [ "Path=/api/v1/payment/**" ]
+
       globalcors:
         cors-configurations:
           '[/**]':
