@@ -1,5 +1,5 @@
-#server:
-#  port: ${PORT:8002}
+server:
+ port: ${PORT:8002}
 
 spring:
   application:
@@ -23,7 +23,7 @@ spring:
 
   flyway:
     enabled: true
-    baseline-on-migrate: true
+    baseline-on-migrate: false
     locations: classpath:db/migration
 
 #logging:
@@ -81,3 +81,17 @@ springdoc:
     operations-sorter: alpha
     tags-sorter: alpha
   packages-to-scan: com.gdb.transactions.controller
+
+app:
+  services:
+    auth-url: ${AUTH_SERVICE_URL:http://localhost:8004}
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_URL:http://eureka-server:8761/eureka}
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${random.value}

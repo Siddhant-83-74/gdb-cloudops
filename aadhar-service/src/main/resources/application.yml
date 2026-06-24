@@ -19,7 +19,7 @@ logging:
     max-size: 10MB
     max-history: 30
 
-# Swagger/OpenAPI Configuration
+
 springdoc:
   api-docs:
     path: /api/v1/api-docs
@@ -28,3 +28,14 @@ springdoc:
     operations-sorter: alpha
     tags-sorter: alpha
   packages-to-scan: com.gdb.aadhar.controller
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_URL:http://eureka-server:8761/eureka}
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${random.value}

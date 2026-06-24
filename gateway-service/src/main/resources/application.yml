@@ -8,24 +8,50 @@ spring:
     gateway:
       routes:
         - id: auth-service
-          uri: http://localhost:8004
+          uri: lb://AUTH-SERVICE
           predicates:
             - Path=/api/v1/auth/**
+
         - id: account-service
-          uri: http://localhost:8001
+          uri: lb://ACCOUNT-SERVICE
           predicates:
             - Path=/api/v1/accounts/**
+
         - id: transactions-service
-          uri: http://localhost:8002
-          predicates:
-            - Path=/api/v1/transactions/**,/api/v1/transaction-logs/**
+          uri: lb://TRANSACTIONS-SERVICE
+          predicates: [ "Path=/api/v1/transactions/**,/api/v1/transaction-logs/**,/api/v1/transfer-limits/**" ]
+
         - id: users-service
-          uri: http://localhost:8003
+          uri: lb://USERS-SERVICE
           predicates:
             - Path=/api/v1/users/**
+
+        - id: aadhar-service
+          uri: lb://AADHAR-SERVICE
+          predicates: [ "Path=/api/v1/verify/**,/api/v1/valid-numbers/**" ]
+
+        - id: company-service
+          uri: lb://COMPANY-CRV-SERVICE      
+          predicates: [ "Path=/api/v1/company/**" ]
+
+        - id: payment-gateway-service
+          uri: lb://PAYMENT-GATEWAY-SERVICE
+          predicates: [ "Path=/api/v1/payment/**" ]
+
       globalcors:
         cors-configurations:
           '[/**]':
             allowedOrigins: "*"
             allowedMethods: "*"
             allowedHeaders: "*"
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_URL:http://eureka-server:8761/eureka}
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${random.value}
