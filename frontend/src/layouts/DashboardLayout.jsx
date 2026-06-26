@@ -29,6 +29,8 @@ import {
   ArrowRightLeft,
   Shield,
   Info,
+  Receipt,
+  FileText
 } from 'lucide-react';
 
 const DashboardLayout = () => {
@@ -145,6 +147,24 @@ const DashboardLayout = () => {
         path: '/reports',
         icon: BarChart3,
         roles: ['ADMIN', 'MANAGER'],
+      },
+      {
+        name: 'Credit Cards',
+        path: '/credit-cards',
+        icon: AccountIcon, // Using the alias for CreditCard imported at top
+        roles: ['ADMIN', 'TELLER', 'MANAGER'],
+        subItems: [
+          { name: 'Dashboard', path: '/credit-cards', icon: LayoutDashboard },
+          { name: 'Card Details', path: '/credit-cards/details', icon: AccountIcon },
+          { name: 'Transactions', path: '/credit-cards/transactions', icon: FileText },
+          { name: 'Pay Bill', path: '/credit-cards/pay', icon: Receipt },
+        ]
+      },
+      {
+        name: 'Bank Statements',
+        path: '/statements',
+        icon: FileText,
+        roles: ['ADMIN', 'TELLER', 'MANAGER', 'CUSTOMER'],
       },
       {
         name: 'Settings',

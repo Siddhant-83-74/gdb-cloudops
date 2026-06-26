@@ -93,8 +93,8 @@ const DepositPage = () => {
       newErrors.amount = 'Amount is required';
     } else if (parseFloat(formData.amount) <= 0) {
       newErrors.amount = 'Amount must be greater than 0';
-    } else if (parseFloat(formData.amount) > 50000) {
-      newErrors.amount = 'Maximum deposit amount is ₹50,000';
+    } else if (parseFloat(formData.amount) > 10000000) {
+      newErrors.amount = 'Maximum deposit amount is ₹1,00,00,000';
     }
 
     setErrors(newErrors);

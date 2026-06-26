@@ -7,18 +7,18 @@
 
 import axios from 'axios';
 
-// API Base URLs from Environment Variables
-const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+// All traffic goes through the API gateway
+const GATEWAY_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080';
 
 export const API_BASE_URLS = {
-  aadhar: BASE_URL,
-  company: BASE_URL,
-  auth: BASE_URL,
-  users: BASE_URL,
-  accounts: BASE_URL,
-  transactions: BASE_URL,
-  notification: BASE_URL,
-  paymentGateway: BASE_URL,
+  aadhar: import.meta.env.VITE_AADHAR_SERVICE_URL || GATEWAY_URL,
+  company: import.meta.env.VITE_COMPANY_CRV_SERVICE_URL || GATEWAY_URL,
+  auth: import.meta.env.VITE_AUTH_SERVICE_URL || GATEWAY_URL,
+  users: import.meta.env.VITE_USERS_SERVICE_URL || GATEWAY_URL,
+  accounts: import.meta.env.VITE_ACCOUNTS_SERVICE_URL || GATEWAY_URL,
+  transactions: import.meta.env.VITE_TRANSACTIONS_SERVICE_URL || GATEWAY_URL,
+  notification: import.meta.env.VITE_NOTIFICATION_SERVICE_URL || GATEWAY_URL,
+  paymentGateway: import.meta.env.VITE_PAYMENT_GATEWAY_URL || GATEWAY_URL,
 };
 
 // Create axios instances for each service
